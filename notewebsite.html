@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+</head>
+
+<body>
+
+    <h1>Notes</h1>
+
+    <div id="notes-container">
+
+    </div>
+
+    <script>
+        let notesContainer = document.getElementById("notes-container");
+
+        let getNotes = async () => {
+            let respone = await fetch('http://127.0.0.1:8000/notes/')
+            let notes = await respone.json()
+
+            for (let i = 0; notes.length > i; i++) {
+                let note = notes[i];
+
+                let row = `<div>
+                           <h3>${note.body}</h3>
+                           </div> `
+                notesContainer.innerHTML += row;
+            }
+        }
+        getNotes();
+
+    </script>
+
+</body>
+
+</html>
